@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit, OnChanges } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, OnChanges, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -6,8 +6,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnChanges {
-  @ViewChild('myVideo', { read: ElementRef }) myVideo: ElementRef;
+export class AppComponent implements OnInit, OnChanges, AfterViewInit {
+  @ViewChild('videoPlayer') videoplayer: ElementRef;
   title = 'wedding';
   days: any;
   hours: any;
@@ -15,13 +15,17 @@ export class AppComponent implements OnInit, OnChanges {
   seconds: any;
   videoTag;
   constructor(private sanitizer: DomSanitizer) {
-    this.videoTag = this.getVideoTag();
+    //this.videoTag = this.getVideoTag();
+    
   }
   ngOnChanges() {
     this.setCountDown()
   }
   ngOnInit() {
     this.setCountDown()
+  }
+  ngAfterViewInit() {
+    this.videoplayer.nativeElement.play();
   }
   setCountDown() {
     var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
@@ -48,10 +52,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
   private getVideoTag() {
     return this.sanitizer.bypassSecurityTrustHtml(
-      `<video class="landing-page-video noselect" muted loop autoplay playsinline disableRemotePlayback width="100%">
-            <source src="./assets/video/CHAKRI+BHAGYA.webm" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>`
+      ``
     );
   }
 }

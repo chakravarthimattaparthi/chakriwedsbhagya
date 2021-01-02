@@ -1,5 +1,10 @@
 <div class="header">
-  <div class="video" [innerHTML]="videoTag"></div>
+  <div class="video" >
+    <video class="landing-page-video noselect" [muted]='true' loop autoplay #videoplayer playsinline disableRemotePlayback width="100%">
+      <source src="./assets/video/CHAKRI+BHAGYA.webm" type="video/mp4">
+      Your browser does not support HTML5 video.
+  </video>
+  </div>
   <div class="video-overlay"></div>
   <div class="names-heading">
     <h2>Chakri & Bhagya</h2>
