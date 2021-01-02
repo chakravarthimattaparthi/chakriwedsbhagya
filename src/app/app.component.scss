@@ -261,6 +261,16 @@ video#myVideo {
     text-transform: uppercase;
 }
 
+
+.video {
+    width: 100%;
+    position: relative;
+}
+
+.video video{
+    width: 100% !important;
+}
+
 .count-down-section {
     background: url(../assets/images/count-down-bg.jpg);
     padding: 60px 0;

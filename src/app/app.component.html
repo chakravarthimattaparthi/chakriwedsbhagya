@@ -1,8 +1,5 @@
 <div class="header">
-  <video loop muted autoplay oncanplay="this.play()" onloadedmetadata="this.muted = true" id="myVideo">
-    <source src="./assets/video/CHAKRI+BHAGYA.webm" type="video/mp4">
-    Your browser does not support HTML5 video.
-  </video>
+  <div class="video" [innerHTML]="videoTag"></div>
   <div class="video-overlay"></div>
   <div class="names-heading">
     <h2>Chakri & Bhagya</h2>
