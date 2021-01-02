@@ -1,5 +1,5 @@
 <div class="header">
-  <video autoplay [muted]="'muted'" loop id="myVideo" controls="controls">
+  <video #video (canplay)="video.play()" [muted]="'muted'" loop id="myVideo" controls="controls">
     <source src="./assets/video/CHAKRI+BHAGYA.webm" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
