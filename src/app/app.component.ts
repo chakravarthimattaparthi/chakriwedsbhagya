@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnInit, OnChanges, AfterViewInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
+declare var google;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,6 +14,16 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
   minutes: any;
   seconds: any;
   videoTag;
+  imageGallry = [
+    {
+      type : 'pre-wedding',
+      src: 'https://photos.app.goo.gl/txtgDr4PQQuUxiqQ7'
+    },
+    {
+      type : 'pre-wedding',
+      src: 'https://photos.google.com/album/AF1QipP0K-Z74tl75WBmROv0dgiHmOY5qXFd3vlPRrjz/photo/AF1QipOIx4VcC81Lpkdnqy4uPa3PhJ7vsRlK7uazGCeN'
+    }
+  ]
   constructor(private sanitizer: DomSanitizer) {
     //this.videoTag = this.getVideoTag();
     
@@ -22,10 +32,11 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     this.setCountDown()
   }
   ngOnInit() {
-    this.setCountDown()
+    this.setCountDown();
+    this.initMap();
   }
   ngAfterViewInit() {
-    this.videoplayer.nativeElement.play();
+   // document.getElementById('video').play();
   }
   setCountDown() {
     var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
@@ -54,6 +65,24 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     return this.sanitizer.bypassSecurityTrustHtml(
       ``
     );
+  }
+  initMap(): void {
+    // The location of Uluru
+    const uluru = { lat: -25.344, lng: 131.036 };
+    // The map, centered at Uluru
+    const map = new google.maps.Map(
+      document.getElementById("map") as HTMLElement,
+      {
+        zoom: 4,
+        center: uluru,
+      }
+    );
+  
+    // The marker, positioned at Uluru
+    const marker = new google.maps.Marker({
+      position: uluru,
+      map: map,
+    });
   }
 }
 
