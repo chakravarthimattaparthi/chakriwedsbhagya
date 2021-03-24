@@ -8,21 +8,53 @@ declare var google;
 })
 export class AppComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
+  map;
   title = 'wedding';
   days: any;
   hours: any;
   minutes: any;
   seconds: any;
   videoTag;
+  location;
+  gmarkers = [];
   imageGallry = [
     {
       type : 'pre-wedding',
-      src: 'https://photos.app.goo.gl/txtgDr4PQQuUxiqQ7'
+      src: './assets/gallery/img1.jpg'
     },
     {
       type : 'pre-wedding',
-      src: 'https://photos.google.com/album/AF1QipP0K-Z74tl75WBmROv0dgiHmOY5qXFd3vlPRrjz/photo/AF1QipOIx4VcC81Lpkdnqy4uPa3PhJ7vsRlK7uazGCeN'
+      src: './assets/gallery/img2.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img3.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img4.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img5.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img6.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img7.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img8.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img9.jpg'
     }
+
   ]
   constructor(private sanitizer: DomSanitizer) {
     //this.videoTag = this.getVideoTag();
@@ -33,13 +65,13 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
   }
   ngOnInit() {
     this.setCountDown();
-    this.initMap();
+    this.renderMap();
   }
   ngAfterViewInit() {
    // document.getElementById('video').play();
   }
   setCountDown() {
-    var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+    var countDownDate = new Date("May 27, 2021 01:00:00 ").getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function () {
@@ -66,23 +98,69 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
       ``
     );
   }
-  initMap(): void {
-    // The location of Uluru
-    const uluru = { lat: -25.344, lng: 131.036 };
-    // The map, centered at Uluru
-    const map = new google.maps.Map(
-      document.getElementById("map") as HTMLElement,
-      {
-        zoom: 4,
-        center: uluru,
-      }
-    );
-  
-    // The marker, positioned at Uluru
-    const marker = new google.maps.Marker({
-      position: uluru,
-      map: map,
+
+
+
+  renderMap(){
+    this.location = { lat: 16.727503114319212, lng: 81.85060050735873 };
+    this.map = new google.maps.Map(document.getElementById('map'), {
+      center: this.location,
+      zoom: 16,
+      disableDefaultUI: true,
+      mapTypeId: 'roadmap',
+      /* styles: [
+        {
+          featureType: 'road',
+          elementType: 'geometry',
+          stylers: [{color: '#B8B8B8'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry.stroke',
+          stylers: [{color: '#CDCDCD'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#9ca5b3'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry',
+          stylers: [{color: '#8C9098'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry.stroke',
+          stylers: [{color: '#E3E5E7'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#6D7C8C'}]
+        },{
+          featureType: 'road.highway',
+          elementType: 'labels.text.stroke',
+          stylers: [{color: '#ffffff'}]
+        }
+      ]  */
     });
+    let marker = new google.maps.Marker({
+      position: this.location,
+      icon: "../../assets/wedding-couple.svg",
+      map: this.map,
+    });
+    let infowindow = new google.maps.InfoWindow()
+    this.gmarkers.push(marker);
+
+        //Added event listners for blood bonar pointers
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent("<a href='geo:16.727503114319212, lng: 81.85060050735873' target='_blank'>Get Directions</a>");
+              infowindow.open(this.map, marker);
+            }
+        })(marker));
+    this.map.setCenter(this.location);
   }
 }
 
