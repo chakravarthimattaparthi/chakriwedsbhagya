@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+.animated {
+    visibility: visible !important;
+}
+.hide-on-init {
+    visibility: hidden;
+}
 
 body, h1, h2, h3, h4, h5, h6,p {
     font-family: 'Dosis', sans-serif;
@@ -72,6 +78,15 @@ video#myVideo {
     transform: translateX(-50%);
     text-align: center;
 
+}
+.footer.celebrating-love {
+    padding: 300px 0;
+    background: url(../assets/images/footer-bg.JPG);
+    background-size: cover;
+    background-attachment: fixed;
+}
+.by {
+    color: #fff;
 }
 #map {
     width: 100%;
@@ -182,6 +197,14 @@ video#myVideo {
 .about-each-other .row {
     margin-left: 0;
     margin-right: 0;
+}
+.groom-image {
+    position: relative;
+}
+.img-3d-layer {
+    position: absolute;
+    bottom: -6px;
+    left: 162px;
 }
 
 .signature {
@@ -470,9 +493,11 @@ video#myVideo {
     background-attachment: fixed;
 }
 section {
+
+}
+.padding-40 {
     padding: 60px 0;
 }
-
 
 .gallery-section .gallery-filters {
     text-align: left;
@@ -504,10 +529,42 @@ ul {
     display: block;
     text-transform: uppercase;
 }
+.delay1 {
+    animation-delay: 0.5s;
+}
+.delay2 {
+    animation-delay: 1s;
+}
+.delay3 {
+    animation-delay: 1.5s;
+}
+.delay4 {
+    animation-delay: 2s;
+}
+.map-wrapper {
+    position: relative;
+}
+.get-directions {
+    background: #EE675C;
+    display: table;
+    padding: 5px 20px;
+    font-weight: 400;
+    cursor: pointer;
+    position: absolute;
+    color: #fff;
+    right: 10px;
+    top: 10px;
+    z-index: 9;
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 50%);
+}
 
 @media screen and (max-width: 767px) {
     .names-heading {
         width: 100%;
+    }
+    .padding-40 {
+        padding: 0;
     }
     .names-heading h2 {
         font-size: 2.5rem;
@@ -603,10 +660,11 @@ ul {
         position: relative;
     }
     .count-down-section {
-        background-attachment: initial;
+        background-attachment: fixed;
+         background-position: 50%;
     }
     .celebrating-love {
-        background-attachment: initial;
+        background-attachment: fixed;
     }
 }
 
@@ -616,11 +674,11 @@ ul {
     /* Prevent vertical gaps */
     line-height: 0;
     
-    -webkit-column-count: 5;
+    -webkit-column-count: 4;
     -webkit-column-gap:   0px;
-    -moz-column-count:    5;
+    -moz-column-count:    4;
     -moz-column-gap:      0px;
-    column-count:         5;
+    column-count:         4;
     column-gap:           0px;
  }
  
@@ -629,6 +687,11 @@ ul {
    width: 100% !important;
    height: auto !important;
  }
+ #photos iframe {
+    /* Just in case there are inline attributes */
+    width: 100% !important;
+   // height: auto !important;
+  }
  
  @media (max-width: 1200px) {
    #photos {
@@ -651,6 +714,14 @@ ul {
    column-count:         2;
    }
  }
+ @media (max-width: 767px) {
+    .footer.celebrating-love {
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: 50%;
+    }
+ }
+
  @media (max-width: 400px) {
    #photos {
    -moz-column-count:    1;

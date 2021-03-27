@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
   videoTag;
   location;
   gmarkers = [];
+  height;
   imageGallry = [
     {
       type : 'pre-wedding',
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     },
     {
       type : 'pre-wedding',
-      src: './assets/gallery/img2.jpg'
+      src: './assets/gallery/img2.JPG'
     },
     {
       type : 'pre-wedding',
@@ -33,6 +34,10 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     {
       type : 'pre-wedding',
       src: './assets/gallery/img4.jpg'
+    },
+    {
+      type : 'shoot',
+      src: ''
     },
     {
       type : 'pre-wedding',
@@ -48,11 +53,27 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     },
     {
       type : 'pre-wedding',
-      src: './assets/gallery/img8.jpg'
+      src: './assets/gallery/img8.JPG'
     },
     {
       type : 'pre-wedding',
       src: './assets/gallery/img9.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img10.JPG'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img11.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img12.jpg'
+    },
+    {
+      type : 'pre-wedding',
+      src: './assets/gallery/img13.jpg'
     }
 
   ]
@@ -62,14 +83,32 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
   }
   ngOnChanges() {
     this.setCountDown()
+    console.log(document.getElementById('img-5').offsetHeight)
   }
   ngOnInit() {
+    
     this.setCountDown();
     this.renderMap();
   }
   ngAfterViewInit() {
    // document.getElementById('video').play();
+   setTimeout(() => {
+     this.height = document.getElementById('img-5').getBoundingClientRect().height;
+    console.log()
+   },2000)
+   
   }
+
+  myNavFunc(){
+    // If it's an iPhone..
+    if( (navigator.platform.indexOf("iPhone") != -1) 
+        || (navigator.platform.indexOf("iPod") != -1)
+        || (navigator.platform.indexOf("iPad") != -1))
+         window.open("maps://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=[16.727503114319212],[81.85060050735873]");
+    else
+         window.open("https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=[16.727503114319212],[81.85060050735873]");
+}
+
   setCountDown() {
     var countDownDate = new Date("May 27, 2021 01:00:00 ").getTime();
 
@@ -147,7 +186,7 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
     });
     let marker = new google.maps.Marker({
       position: this.location,
-      icon: "../../assets/wedding-couple.svg",
+      icon: "./assets/wedding-couple.svg",
       map: this.map,
     });
     let infowindow = new google.maps.InfoWindow()
@@ -156,7 +195,7 @@ export class AppComponent implements OnInit, OnChanges, AfterViewInit {
         //Added event listners for blood bonar pointers
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-              infowindow.setContent("<a href='geo:16.727503114319212, lng: 81.85060050735873' target='_blank'>Get Directions</a>");
+              infowindow.setContent("<a href='comgooglemaps://?center=16.727503114319212,81.85060050735873&zoom=14&views=traffic' target='_blank'>Get Directions</a>");
               infowindow.open(this.map, marker);
             }
         })(marker));
